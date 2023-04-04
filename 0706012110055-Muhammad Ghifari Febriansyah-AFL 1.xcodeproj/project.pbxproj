@@ -8,6 +8,14 @@
 
 /* Begin PBXBuildFile section */
 		047DC06029AD9FF100C2CFB9 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047DC05F29AD9FF100C2CFB9 /* main.swift */; };
+		04AD7F5329D272F2001078A7 /* Potion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04AD7F5229D272F2001078A7 /* Potion.swift */; };
+		04AD7F5529D2730B001078A7 /* Monster.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04AD7F5429D2730B001078A7 /* Monster.swift */; };
+		04AD7F5729D27315001078A7 /* Hero.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04AD7F5629D27315001078A7 /* Hero.swift */; };
+		04AD7F5929D27340001078A7 /* Skill.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04AD7F5829D27340001078A7 /* Skill.swift */; };
+		04AD7F5F29D279CA001078A7 /* Shield.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04AD7F5E29D279CA001078A7 /* Shield.swift */; };
+		04AD7F6129D28759001078A7 /* Attack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04AD7F6029D28759001078A7 /* Attack.swift */; };
+		04CF7A3929D4C89400542FE5 /* Health_Pot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04CF7A3829D4C89400542FE5 /* Health_Pot.swift */; };
+		04CF7A3B29D4C98600542FE5 /* Mana_Pot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04CF7A3A29D4C98600542FE5 /* Mana_Pot.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -25,6 +33,14 @@
 /* Begin PBXFileReference section */
 		047DC05C29AD9FF100C2CFB9 /* 0706012110055-Muhammad Ghifari Febriansyah-AFL 1 */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "0706012110055-Muhammad Ghifari Febriansyah-AFL 1"; sourceTree = BUILT_PRODUCTS_DIR; };
 		047DC05F29AD9FF100C2CFB9 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
+		04AD7F5229D272F2001078A7 /* Potion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Potion.swift; sourceTree = "<group>"; };
+		04AD7F5429D2730B001078A7 /* Monster.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Monster.swift; sourceTree = "<group>"; };
+		04AD7F5629D27315001078A7 /* Hero.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Hero.swift; sourceTree = "<group>"; };
+		04AD7F5829D27340001078A7 /* Skill.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Skill.swift; sourceTree = "<group>"; };
+		04AD7F5E29D279CA001078A7 /* Shield.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shield.swift; sourceTree = "<group>"; };
+		04AD7F6029D28759001078A7 /* Attack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Attack.swift; sourceTree = "<group>"; };
+		04CF7A3829D4C89400542FE5 /* Health_Pot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Health_Pot.swift; sourceTree = "<group>"; };
+		04CF7A3A29D4C98600542FE5 /* Mana_Pot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mana_Pot.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +74,14 @@
 			isa = PBXGroup;
 			children = (
 				047DC05F29AD9FF100C2CFB9 /* main.swift */,
+				04AD7F5229D272F2001078A7 /* Potion.swift */,
+				04AD7F5429D2730B001078A7 /* Monster.swift */,
+				04AD7F5629D27315001078A7 /* Hero.swift */,
+				04AD7F5829D27340001078A7 /* Skill.swift */,
+				04AD7F6029D28759001078A7 /* Attack.swift */,
+				04AD7F5E29D279CA001078A7 /* Shield.swift */,
+				04CF7A3829D4C89400542FE5 /* Health_Pot.swift */,
+				04CF7A3A29D4C98600542FE5 /* Mana_Pot.swift */,
 			);
 			path = "0706012110055-Muhammad Ghifari Febriansyah-AFL 1";
 			sourceTree = "<group>";
@@ -120,7 +144,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				04AD7F5F29D279CA001078A7 /* Shield.swift in Sources */,
+				04AD7F5329D272F2001078A7 /* Potion.swift in Sources */,
+				04AD7F5529D2730B001078A7 /* Monster.swift in Sources */,
+				04CF7A3929D4C89400542FE5 /* Health_Pot.swift in Sources */,
+				04AD7F6129D28759001078A7 /* Attack.swift in Sources */,
+				04AD7F5929D27340001078A7 /* Skill.swift in Sources */,
 				047DC06029AD9FF100C2CFB9 /* main.swift in Sources */,
+				04CF7A3B29D4C98600542FE5 /* Mana_Pot.swift in Sources */,
+				04AD7F5729D27315001078A7 /* Hero.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

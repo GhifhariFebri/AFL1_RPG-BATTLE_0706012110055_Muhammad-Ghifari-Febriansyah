@@ -11,26 +11,19 @@ var returnContinue: String = ""
 var menuChoice:String = ""
 var correctChoice: Bool = true
 var battle = ""
-var chance = 2
-
-var skill = ["Physical Attack. No mana required. Deal 5 pt of damage.", "Meteor. Use 15 points of MP. Deal 50 pt of damage.", "Shield. Use 10 pt of MP. Block enemy's attack for 1 turn."]
 var playerName: String = ""
-var playerHealth = 100
-var playerAttack = 10
-var playerMP = 50
-var potion = 10
-var elixir = 5
 var heal: String = ""
 var healagain: String = ""
-var getHeal = 20
-var multiplier = 1
-var shield = 0
 
-var mpUsage = [0, 15, 10]
-
-var enemyHealth = 1000
-var enemy = ["Golem", "Troll"]
-var enemyName = ""
+var hero = Hero(mp: 0, health: 0, name: "", multiplier: 1)
+var phys = Attack(skillName: "Physical Attack", mpUsage: 0, skillDesc: "Physical Attack. No mana required. Deal 5 pt of damage.", damage: 5)
+var meteor = Attack(skillName: "Meteor", mpUsage: 15, skillDesc: "Meteor. Use 15 points of MP. Deal 50 pt of damage.", damage: 50)
+var shield1 = Shield(skillName: "Shield", mpUsage: 10, skillDesc: "Shield. Use 10 pt of MP. Block enemy's attack for 1 turn.", turn: 0)
+var skill = [phys, meteor, shield1]
+var health_pot = Health_Potion("Health Potion", amount: 10, potionDesc: "Heal 20 pts of your HP")
+var mana_pot = Mana_Potion("Elixir Potion", amount: 5, potionDesc: "Restore 10 pts of your MP")
+var potions = [health_pot, mana_pot]
+var monster = Monster(monsterAttack: 0, monsterHealth: 1000, monsterName: "", monDrop: 0)
 
 welcomeScreen()
 
@@ -52,10 +45,12 @@ func welcomeScreen(){
 }
 
 func gameStart(){
+
     repeat{
         print("\nMay i know your name young Wizard?", terminator: " ")
         playerName = readLine()!
         if isAlphabet(input: playerName) && !playerName.isEmpty  {
+            hero = Hero(mp: 30, health: 100, name:  playerName, multiplier: 1)
             journeyScreen()
         }
         else{
@@ -70,7 +65,7 @@ func isAlphabet(input: String) -> Bool {
 }
 
 func journeyScreen(){
-    print("\nWelcome, \(playerName) To the magical world!")
+    print("\nWelcome, \(hero.name) To the magical world!")
     print("From here, you can...")
     print("\n[C]heck your health and stats")
     print("[H]eal your wounds with potion")
@@ -105,21 +100,20 @@ func userChoice(){
 }
 
 func healMenu(){
-    print("\nYour hp is : \(playerHealth)")
-    print("You have \(potion) potions left")
+    print("\nYour hp is : \(hero.health)")
+    print("You have \(health_pot.amount) potions left")
     print("\nAre you sure you want to use 1 potion to heal your wounds? Y/N", terminator: " ")
     heal = readLine()!.lowercased()
     switch heal{
     case "y":
-        if(potion <= 0){
+        if(health_pot.amount <= 0){
             print("\nYou run out of potion!")
             journeyScreen()
         }
-        if(playerHealth < 100){
-            playerHealth += getHeal
-            potion -= 1
-            if (playerHealth > 100){
-                playerHealth = 100
+        if(hero.health < 100){
+            health_pot.usePotion(player: hero)
+            if (hero.health > 100){
+                hero.health = 100
                 healAgain()
             }
             else{
@@ -138,21 +132,20 @@ func healMenu(){
 }
 
 func manaMenu(){
-    print("\nYour mana is : \(playerMP)")
-    print("You have \(elixir) elixir left")
+    print("\nYour mana is : \(hero.mp)")
+    print("You have \(mana_pot.amount) elixir left")
     print("\nAre you sure you want to use 1 elixir to refill your mana? Y/N", terminator: " ")
     heal = readLine()!.lowercased()
     switch heal{
     case "y":
-        if(elixir <= 0){
+        if(mana_pot.amount <= 0){
             print("\nYou run out of elixir!")
             journeyScreen()
         }
-        if(playerMP < 50){
-            playerMP += 10
-            elixir -= 1
-            if (playerMP > 50){
-                playerMP = 50
+        if(hero.mp < 50){
+            mana_pot.usePotion(player: hero)
+            if (hero.mp > 50){
+                hero.mp = 50
                 manaAgain()
             }
             else{
@@ -172,21 +165,20 @@ func manaMenu(){
 
 func healAgain(){
     repeat{
-        print("\nYour HP is now : \(playerHealth)")
-        print("You have \(potion) potions left")
+        print("\nYour HP is now : \(hero.health)")
+        print("You have \(health_pot.amount) potions left")
         print("\nStill want to use 1 potion to heal your wounds again? Y/N", terminator: " ")
         healagain = readLine()!.lowercased()
         switch healagain{
         case "y":
-            if(potion <= 0){
+            if(health_pot.amount <= 0){
                 print("You run out of potion!")
                 journeyScreen()
             }
-            if (playerHealth < 100){
-                playerHealth += getHeal
-                potion -= 1
-                if(playerHealth > 100){
-                    playerHealth = 100
+            if (hero.health < 100){
+                health_pot.usePotion(player: hero)
+                if(hero.health > 100){
+                    hero.health = 100
                 }
             }
             else{
@@ -203,21 +195,21 @@ func healAgain(){
 
 func manaAgain(){
     repeat{
-        print("\nYour mana is now : \(playerMP)")
-        print("You have \(elixir) elixir left")
+        print("\nYour mana is now : \(hero.mp)")
+        print("You have \(mana_pot.amount) elixir left")
         print("\nStill want to use 1 elixir to refill your mana again? Y/N", terminator: " ")
         healagain = readLine()!.lowercased()
         switch healagain{
         case "y":
-            if(elixir <= 0){
+            if(mana_pot.amount <= 0){
                 print("You run out of elixir!")
                 journeyScreen()
             }
-            if (playerMP < 50){
-                playerMP += 10
-                elixir -= 1
-                if(playerMP > 50){
-                    playerMP = 50
+            if (hero.mp < 50){
+                hero.mp += 10
+                mana_pot.amount -= 1
+                if(hero.mp > 50){
+                    hero.mp = 50
                 }
             }
             else{
@@ -233,16 +225,16 @@ func manaAgain(){
 }
 
 func checkStats(){
-    print("\nPlayer's name : \(playerName)")
-    print("\nHP : \(playerHealth)/100")
-    print("MP : \(playerMP)/50")
+    print(hero.printHero)
     print("\nMagic : ")
     for skillName in skill{
-        print("- \(skillName)")
+        print(skillName.printSKill)
     }
+    
     print("\nItems : ")
-    print("- Potions x\(potion). Heal 20 pts of your HP")
-    print("- Elixir x\(elixir). Add 10 pts to your MP")
+    for pot in potions{
+        print(pot.printPotion)
+    }
     print("\nPress [return] to go back : ", terminator: " ")
     returnContinue = readLine()!
     switch returnContinue{
@@ -256,37 +248,28 @@ func checkStats(){
 func battleMenu(){
     switch menuChoice{
     case "m":
-        for enemyNama in enemy{
-            if(enemyNama == "Golem"){
-                print("\nAs you make your way through the rugged mountain terrain, you can feel the chill of wind biting your skin.")
-                print("Suddenly, you hear a sound that makes you freeze in the tracks. That's when you see it -  a massive snarling Golem emerging from the shadows.")
-                enemyName = enemyNama
-                print("\nEnemy : \(enemyName)")
-                print("Health: \(enemyHealth)/1000")
-            }
-        }
-        
+        print("\nAs you make your way through the rugged mountain terrain, you can feel the chill of wind biting your skin.")
+        print("Suddenly, you hear a sound that makes you freeze in the tracks. That's when you see it -  a massive snarling Golem emerging from the shadows.")
+        monster.monsterName = "Golem"
+        print("")
+        print(monster.printMonster)
     case "f":
-        for enemyNama in enemy{
-            if(enemyNama == "Troll"){
                 print("\nAs you enter the forest, you feel a sense of unease wash over you")
                 print("Suddenly, you hear the sounds of twigs snapping behind you. You quickly spin around and find a troll emerging from the shadows.")
-                enemyName = enemyNama
-                print("\nEnemy : \(enemyName)")
-                print("Health: \(enemyHealth)/1000")
-            }
-        }
+        monster.monsterName = "Golem"
+                print("")
+                print(monster.printMonster)
     default:
         journeyScreen()
     }
-    print("\nYour health : \(playerHealth)/100")
-    print("Your mana : \(playerMP)/50")
-    print("Potion : x\(potion)")
-    print("Elixir : x\(elixir)")
+    print(hero.printHero)
+    for allpot in potions{
+        print("\(allpot.potionName) : \(allpot.amount)x")
+    }
     print("\nChoose your action : ")
     var i = 1
     for skillName in skill{
-        print("[\(i)] \(skillName)")
+        print("[\(i)] \(skillName.skillDesc)")
         i = i+1
     }
     print("\n[4] Use Potion to heal wounds.")
@@ -301,67 +284,42 @@ func battleChoice(){
     battle = readLine()!
     switch battle{
     case "1" :
-        print("\nYou attack your enemy using Physical Attack!")
-        print("You deal \(5*multiplier) Attack!")
-        print("it's very effective!")
-        enemyHealth = enemyHealth - 5*multiplier
-        if(shield == 1){
-            print("\nYou block the enemy's attack for this turn!")
-            print("Your shield is gone now!")
-            shield -= 1
-            battleMenu()
+        phys.useSKill(player: hero, monster: monster)
+        if(shield1.turn == 1){
+            shield1.isUp()
         }
-        if(enemyHealth <= 0){
-            print("\nYou has defeated the enemy!")
-            enemyDrop()
-            print("Returning you to the main screen...")
-            enemyHealth = 1000
-            multiplier = 1
-            chance = 2
+        if(monster.monsterHealth <= 0){
+            hero.heroWin(monster: monster)
             journeyScreen()
         }
         enemyAttackFunc()
     case "2" :
-        if(playerMP < 15){
+        if(hero.mp < meteor.mpUsage){
             print("You don't have enough MP!")
             battleMenu()
         }
         else{
-            playerMP -= 15
-            print("\nYou attack your enemy using Meteor Attack!")
-            print("You deal \(50*multiplier) Attack!")
-            print("it's very effective!")
-            enemyHealth = enemyHealth - 50*multiplier
-            if(shield == 1){
-                print("\nYou block the enemy's attack for this turn!")
-                print("Your shield is gone now!")
-                shield -= 1
-                battleMenu()
+            meteor.useSKill(player: hero, monster: monster)
+            if(shield1.turn == 1){
+                shield1.isUp()
             }
-            if(enemyHealth <= 0){
-                print("\nYou has defeated the enemy!")
-                enemyDrop()
-                print("Returning you to the main screen...")
-                enemyHealth = 1000
-                multiplier = 1
-                chance = 2
+            if(monster.monsterHealth <= 0){
+                hero.heroWin(monster: monster)
                 journeyScreen()
             }
             enemyAttackFunc()
         }
     case "3" :
-        if(shield == 1){
+        if(shield1.turn == 1){
             print("\nYou already have your Shield skill up!")
             battleMenu()
         }
-        if(playerMP < 10){
+        if(hero.mp < 10){
             print("You don't have enough MP!")
             battleMenu()
         }
         else{
-            playerMP -= 10
-            shield += 1
-            print("\nYou use Shield!")
+            shield1.useSKill(player: hero, monster: monster)
             battleMenu()
         }
     case "4" :
@@ -369,24 +327,11 @@ func battleChoice(){
     case "5" :
         manaBattle()
     case "6" :
-        var scan = ""
-        var randomVital = Int.random(in: 1...3)
-        switch randomVital{
-        case 1 :
-            multiplier = 2
-            scan = "torso"
-        case 2 :
-            multiplier = 5
-            scan = "heart"
-        case 3 :
-            multiplier = 10
-            scan = "head"
-        default :
-            ""
+        if (hero.chance <= 0){
+            print("\nYou run out of chance to scan the enemy's vital!")
+            battleMenu()
         }
-        chance -= 1
-        print("\nYou succesfully scan the \(enemyName)'s \(scan) vital point. Your damage is now multiplied by \(multiplier)x!")
-        print("You got \(chance) chance left to scan the enemy")
+        hero.scanVital()
         battleMenu()
     case "7" :
         fleeBattle()
@@ -395,19 +340,15 @@ func battleChoice(){
     }
 }
 func enemyDrop(){
-    var randomelix = Int.random(in: 1...10)
-    elixir += randomelix
-    var randomheal = Int.random(in: 1...15)
-    potion += randomheal
+    monster.monsterDrop(drop: mana_pot)
+    var randomelix = monster.monDrop
+    monster.monsterDrop(drop: health_pot)
+    var randomheal = monster.monDrop
     print("The enemy drops you \(randomelix)x elixir and \(randomheal)x healing potion. Use them in your next battle!")
 }
 
 func fleeBattle(){
-    print("\nYou feel that if you don't escape soon, you won't be able to continue to fight.")
-    print("You look around frantically, searching for a way out. You sprint towards the exit, your heart pounding in your chest.")
-    print("\nYou're safe for now.")
-    enemyHealth = 1000
-    chance = 2
+    hero.retreat(monster: monster)
     print("\npress [return] to continue", terminator: " ")
     returnContinue = readLine()!
     switch returnContinue{
@@ -420,21 +361,20 @@ func fleeBattle(){
 
 func healBattle(){
     repeat{
-        print("\nYour hp is : \(playerHealth)")
-        print("You have \(potion) potions left")
-        print("\nWant to use 1 potion to heal your wounds again? Y/N", terminator: " ")
+        print("\nYour hp is : \(hero.health)")
+        print("You have \(health_pot.amount) potions left")
+        print("\nWant to use 1 potion to heal your wounds? Y/N", terminator: " ")
         heal = readLine()!.lowercased()
         switch heal{
         case "y":
-            if(potion <= 0){
+            if(health_pot.amount <= 0){
                 print("\nYou run out of potion!")
                 battleMenu()
             }
-            if (playerHealth < 100){
-                playerHealth += getHeal
-                potion -= 1
-                if(playerHealth > 100){
-                    playerHealth = 100
+            if (hero.health < 100){
+                health_pot.usePotion(player: hero)
+                if(hero.health > 100){
+                    hero.health = 100
                     healBattle()
                 }
             }
@@ -452,21 +392,20 @@ func healBattle(){
 
 func manaBattle(){
     repeat{
-        print("\nYour mana is : \(playerMP)")
-        print("You have \(elixir) elixir left")
-        print("\nStill want to use 1 elixir to refill your mana again? Y/N", terminator: " ")
+        print("\nYour mana is : \(hero.mp)")
+        print("You have \(mana_pot.amount) elixir left")
+        print("\nWant to use 1 elixir to refill your mana? Y/N", terminator: " ")
         healagain = readLine()!.lowercased()
         switch healagain{
         case "y":
-            if(elixir <= 0){
+            if(mana_pot.amount <= 0){
                 print("\nYou run out of elixir!")
                 battleMenu()
             }
-            if (playerMP < 50){
-                playerMP += 10
-                elixir -= 1
-                if(playerMP > 50){
-                    playerMP = 50
+            if (hero.mp < 50){
+                mana_pot.usePotion(player: hero)
+                if(hero.mp > 50){
+                    hero.mp = 50
                 }
             }
             else{
@@ -482,17 +421,9 @@ func manaBattle(){
 }
 
 func enemyAttackFunc() {
-    var randomAtt = Int.random(in: 5...10)
-    playerHealth -= randomAtt
-    print("\nThe enemy \(enemyName) attack you for \(randomAtt) damage")
-    if (playerHealth <= 0){
-        print("The enemy \(enemyName) defeated you!")
-        print("Returning you to the main menu...")
-        playerHealth = 20
-        playerMP = 10
-        enemyHealth = 1000
-        multiplier = 1
-        chance = 2
+    monster.monsterTurn(player: hero)
+    if (hero.health <= 0){
+        monster.monsterWin(player: hero)
         journeyScreen()
     }else{
         battleMenu()
