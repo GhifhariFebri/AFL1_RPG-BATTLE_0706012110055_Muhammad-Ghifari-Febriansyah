@@ -8,7 +8,7 @@
 import Foundation
 class Shield: Skill{
     var turn: Int
-        
+    
         init(skillName: String, mpUsage: Int, skillDesc: String, turn: Int) {
             self.turn = turn
             super.init(skillName: skillName, mpUsage: mpUsage, skillDesc: skillDesc)

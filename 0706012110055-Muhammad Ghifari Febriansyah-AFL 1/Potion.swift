@@ -7,7 +7,7 @@
 
 import Foundation
 
-class Potion {
+class Potion: Inventory{
     var potionName: String
     var amount: Int
     var potionDesc: String
@@ -24,7 +24,7 @@ class Potion {
         self.potionDesc = potionDesc
     }
         
-    func usePotion(player: Hero){
+    func useItem(player: Hero){
         amount -= 1
 
     }

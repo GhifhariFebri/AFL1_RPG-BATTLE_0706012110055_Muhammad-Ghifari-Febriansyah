@@ -16,6 +16,8 @@
 		04AD7F6129D28759001078A7 /* Attack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04AD7F6029D28759001078A7 /* Attack.swift */; };
 		04CF7A3929D4C89400542FE5 /* Health_Pot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04CF7A3829D4C89400542FE5 /* Health_Pot.swift */; };
 		04CF7A3B29D4C98600542FE5 /* Mana_Pot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04CF7A3A29D4C98600542FE5 /* Mana_Pot.swift */; };
+		04EEE3E829DD2F190095BED6 /* Enemy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04EEE3E729DD2F190095BED6 /* Enemy.swift */; };
+		04EEE42129DE949E0095BED6 /* Inventory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04EEE42029DE949E0095BED6 /* Inventory.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -41,6 +43,8 @@
 		04AD7F6029D28759001078A7 /* Attack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Attack.swift; sourceTree = "<group>"; };
 		04CF7A3829D4C89400542FE5 /* Health_Pot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Health_Pot.swift; sourceTree = "<group>"; };
 		04CF7A3A29D4C98600542FE5 /* Mana_Pot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mana_Pot.swift; sourceTree = "<group>"; };
+		04EEE3E729DD2F190095BED6 /* Enemy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enemy.swift; sourceTree = "<group>"; };
+		04EEE42029DE949E0095BED6 /* Inventory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Inventory.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -82,6 +86,8 @@
 				04AD7F5E29D279CA001078A7 /* Shield.swift */,
 				04CF7A3829D4C89400542FE5 /* Health_Pot.swift */,
 				04CF7A3A29D4C98600542FE5 /* Mana_Pot.swift */,
+				04EEE3E729DD2F190095BED6 /* Enemy.swift */,
+				04EEE42029DE949E0095BED6 /* Inventory.swift */,
 			);
 			path = "0706012110055-Muhammad Ghifari Febriansyah-AFL 1";
 			sourceTree = "<group>";
@@ -149,7 +155,9 @@
 				04AD7F5529D2730B001078A7 /* Monster.swift in Sources */,
 				04CF7A3929D4C89400542FE5 /* Health_Pot.swift in Sources */,
 				04AD7F6129D28759001078A7 /* Attack.swift in Sources */,
+				04EEE42129DE949E0095BED6 /* Inventory.swift in Sources */,
 				04AD7F5929D27340001078A7 /* Skill.swift in Sources */,
+				04EEE3E829DD2F190095BED6 /* Enemy.swift in Sources */,
 				047DC06029AD9FF100C2CFB9 /* main.swift in Sources */,
 				04CF7A3B29D4C98600542FE5 /* Mana_Pot.swift in Sources */,
 				04AD7F5729D27315001078A7 /* Hero.swift in Sources */,

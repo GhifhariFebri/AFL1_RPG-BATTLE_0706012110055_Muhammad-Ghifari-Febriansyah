@@ -8,8 +8,8 @@
 import Foundation
 class Mana_Potion: Potion{
     
-    override func usePotion(player: Hero) {
-        super.usePotion(player: hero)
+    override func useItem(player: Hero) {
+        super.useItem(player: hero)
         hero.mp += 10
     }
 }
